@@ -1,76 +1,51 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using static Assignment6.AssignQ1.EmployeeManagementSystem.Manager;
 
-
-
-namespace Assignment5
+namespace Delegates
 {
-    public class Student
+    public delegate void EmployeeDelegate();
+    public class MultiCastDelegate
     {
-        public string name;
-        public int id;
-        public int rollNum;
-
-
-
-        public Student(string name, int id, int rollNo)
+        static void Main(string[] args)
         {
-            this.name = name;
-            this.id = id;
-            this.rollNum = rollNo;
 
 
-
-
-            Console.WriteLine("Student Name : {0}", name);
-            Console.WriteLine("Student Id : {0}", id);
-            Console.WriteLine("Student Roll number : {0}", rollNo);
-        }
-    }
-
-
-
-    public class AddingData
-    {
-
-        public void StudentData()
-        {
-            Student s1 = new Student("Likhitha", 1234, 04);
-            Student s2 = new Student("Keerthy", 4321, 20);
-            Student s3 = new Student("vesa", 1212, 02);
-
-
-
-            ArrayList StudentList = new ArrayList();
-
-
-
-            StudentList.Add(s1);
-            StudentList.Add(s2);
-            StudentList.Add(s3);
-
-
-
-
+            EmployeeDelegate empdel1 = new EmployeeDelegate(kilometerTravel);
+            EmployeeDelegate empdel2 = new EmployeeDelegate(tourallowance);
+            EmployeeDelegate empdel3 = new EmployeeDelegate(Telephoneallowance);
+            EmployeeDelegate empdel4 = new EmployeeDelegate(details);
+            EmployeeDelegate empdel5 = empdel1 + empdel2 + empdel3 + empdel4;
+            empdel5();
 
         }
-    }
-    public class RetriveData
+
+    public static void kilometerTravel()
     {
-        public static void Main()
-        {
-            AddingData data = new AddingData();
-            data.StudentData();
-
-
-
-            Console.ReadKey();
-        }
-
+        int kt = 2;
+        Console.WriteLine("Kilometer: {0}", kt);
     }
-
+    public static void tourallowance()
+    {
+        int kt = 2;
+        int ta = (int)kt * 5;
+        Console.WriteLine("Tourallowance:{0}", ta);
+    }
+    public static void Telephoneallowance()
+    {
+        int tpa = 1000;
+        Console.WriteLine("Telephone Allowance:{0}", tpa);
+    }
+    public static void details()
+    {
+        int ID = 1;
+            string name = "Rasna";
+        int salary = 20000;
+        Console.WriteLine("Marketingexecutive ID:{0}", ID);
+        Console.WriteLine("MarketingExecutive Name:{0}", name);
+        Console.WriteLine("MarketingExecutive salary:{0}", salary);
+    }
+}
 }
