@@ -24,6 +24,7 @@ namespace FileIODemo
             "directories inside {0}\n", path);
             foreach (string directory in directories)
             {
+                
                 string directoryName = new DirectoryInfo(
                 Path.GetDirectoryName(directory)).Name;
                 Console.WriteLine(directoryName);
