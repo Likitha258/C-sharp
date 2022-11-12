@@ -4,70 +4,134 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment1
+namespace Assignment4
 {
- class AssignQ1
-    
-
-
-
-
+    internal class AssignQ1
     {
-        static void Main(string[] args)
-
-
-
-
+        class Stack
         {
-            Console.WriteLine("enter a number");
-            int X = Convert.ToInt32(Console.ReadLine());
-
-
-
-            Console.WriteLine("enter another number");
-            int Y = Convert.ToInt32(Console.ReadLine());
-
-
-
-
-            Console.WriteLine("1.Addition: ");
-            Console.WriteLine("2.Substraction: ");
-            Console.WriteLine("3.multiplication ");
-            Console.WriteLine("4.division ");
-            Console.WriteLine("5.modulus: ");
-
-
-
-            int A = Convert.ToInt32(Console.ReadLine());
-            switch (A)
+            private int[] ele;
+            private int top;
+            private int max;
+            public Stack(int size)
             {
-                case 1:
-                    Console.WriteLine("Addition of two numbers :" + (X + Y));
-                    break;
-                case 2:
-                    Console.WriteLine("Substraction of two numbers :" + (X - Y));
-                    break;
-                case 3:
-                    Console.WriteLine("multiplication of two numbers :" + (X * Y));
-                    break;
-                case 4:
-                    Console.WriteLine("division of two numbers :" + (X / Y));
-                    break;
-                case 5:
-                    Console.WriteLine("Modulus of two numbers :" + (X % Y));
-                    break;
-                default:
-                    Console.WriteLine("choose only 1 to 5");
-                    break;
+                ele = new int[size];
+                top = -1;
+                max = size;
             }
-            Console.ReadLine();
 
 
 
+            public void push(int item)
+            {
+                try
+                {
+                    if (top == max - 1)
+                    {
+                        Console.WriteLine("Stack Overflow");
+
+                    }
+                    else
+                    {
+                        ele[++top] = item;
+                    }
+                }
+                catch (StackOverflowException e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+
+
+
+            public int pop()
+            {
+
+
+                if (top == -1)
+                {
+                    Console.WriteLine("Stack Underflow");
+                    return -1;
+                }
+                else
+                {
+                    Console.WriteLine("Poped element is: " + ele[top]);
+                    return ele[top--];
+                }
+
+
+
+
+
+
+
+            }
+
+
+
+            public void printStack()
+            {
+                try
+                {
+                    if (top == -1)
+                    {
+                        Console.WriteLine("Stack is Empty");
+                        return;
+                    }
+                    else
+                    {
+                        for (int i = 0; i <= top; i++)
+                        {
+                            Console.WriteLine("Item[" + (i + 1) + "]: " + ele[i]);
+                        }
+                    }
+                }
+                catch (InsufficientExecutionStackException e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
         }
 
 
 
+        class Program
+        {
+            static void Main()
+            {
+                Stack S = new Stack(10);
 
+
+
+                S.push(101);
+                S.push(102);
+                S.push(103);
+                S.push(104);
+                S.push(105);
+                S.push(110);
+
+
+
+
+                Console.WriteLine("Items are : ");
+                S.printStack();
+
+
+
+                S.pop();
+                S.pop();
+                S.pop();
+                S.pop();
+                S.pop();
+                S.pop();
+                S.pop();
+
+
+
+
+                Console.ReadKey();
+            }
+
+        }
     }
 }
