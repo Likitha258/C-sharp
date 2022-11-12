@@ -1,35 +1,21 @@
-﻿using System;
-using System.IO;
-namespace FileIODemo
+﻿
+using System;
+using System.Reflection;
+
+public class Asmload0
 {
-    internal class AssignQ1
+    public static void Main()
     {
-        static void Main(string[] args)
-        {
-            string path = @"D:\Workarea\Test";
-            string[] files = Directory.GetFiles(path);
-            string[] directories =
-            Directory.GetDirectories(path);
-
-            Console.WriteLine("Displaying names of " +
-            "files inside {0}\n", path);
-            foreach (string file in files)
-            {
-                string fileNameWithoutExtension =
-                Path.GetFileNameWithoutExtension(file);
-                Console.WriteLine(fileNameWithoutExtension);
-            }
-
-            Console.WriteLine("\n\nDisplaying names of " +
-            "directories inside {0}\n", path);
-            foreach (string directory in directories)
-            {
-                
-                string directoryName = new DirectoryInfo(
-                Path.GetDirectoryName(directory)).Name;
-                Console.WriteLine(directoryName);
-            }
-            Console.Read();
-        }
+        // Use the file name to load the assembly into the current
+        // application domain.
+        Assembly a = Assembly.Load("example");
+        // Get the type to use.
+        Type myType = a.GetType("Example");
+        // Get the method to call.
+        MethodInfo myMethod = myType.GetMethod("MethodA");
+        // Create an instance.
+        object obj = Activator.CreateInstance(myType);
+        // Execute the method.
+        myMethod.Invoke(obj, null);
     }
 }
