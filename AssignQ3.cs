@@ -1,69 +1,32 @@
-﻿using System;
-namespace Bank
+﻿
+using System;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using System.Threading.Tasks;
+namespace DemoApplication
 {
-    class BankAccount
+    [Serializable]
+    class Tutorial
     {
-        public double AccountNumber = 12345678;
-        public String Name = "Indra";
-        public double bankbalance = 133333434;
-        public void data()
+        public int ID;
+        public String Name;
+        static void Main(string[] args)
         {
-            Console.WriteLine("Accountnumber={0}\nAccountHolder={1}\nBankbalace={2}", AccountNumber, Name, bankbalance);
-        }
-        public void deposit(double money)
-        {
-            if (money > 0)
-            {
-                bankbalance = bankbalance + money;
-                Console.WriteLine("Bank Balance=" + bankbalance);
-
-            }
-            else
-            {
-                Console.WriteLine("enter correct value of amount");
-
-            }
-            Console.WriteLine("Bank Balance=" + bankbalance);
-        }
-        public void withdraw(double amount)
-        {
-            if (amount < bankbalance)
-            {
-                bankbalance -= amount;
-            }
-            else if (amount > bankbalance)
-            {
-                Console.WriteLine("Insufficient Balance");
-            }
-            else
-            {
-                Console.WriteLine("select correct choice");
-            }
-            Console.WriteLine("Bank Balance=" + bankbalance);
-
-
-
-        }
-        public void balance()
-        {
-            Console.WriteLine("bank balance=" + bankbalance);
-        }
-
-
-
-    }
-    class ICICIBankAccount : BankAccount
-    {
-        public void withdraw(double amount)
-        {
-            if (amount < bankbalance)
-            {
-                bankbalance -= amount;
-            }
-
-
-
-
+            Tutorial obj = new Tutorial();
+            obj.ID = 1;
+            obj.Name = ".Net";
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(@"E:\ExampleNew.txt", FileMode.Create, FileAccess.Write);
+            formatter.Serialize(stream, obj);
+            stream.Close();
+            stream = new FileStream(@"E:\ExampleNew.txt", FileMode.Open, FileAccess.Read);
+            Tutorial objnew = (Tutorial)formatter.Deserialize(stream);
+            Console.WriteLine(objnew.ID);
+            Console.WriteLine(objnew.Name);
+            Console.ReadKey();
         }
     }
 }
