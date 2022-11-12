@@ -4,134 +4,71 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment4
+namespace assignment5
 {
-    internal class AssignQ1
+    public class Program
     {
-        class Stack
+        int[] elements = new int[] { 655, 10, 30, 49 };
+        int[] arr = new int[3];
+        string[] ele = new string[] { "hari", "soni", "scott" };
+        public void Sort()
         {
-            private int[] ele;
-            private int top;
-            private int max;
-            public Stack(int size)
+            Array.Sort(elements);
+            foreach (int i in elements)
             {
-                ele = new int[size];
-                top = -1;
-                max = size;
+                Console.WriteLine(i);
             }
-
-
-
-            public void push(int item)
+            Array.Sort(ele);
+            foreach (string i in ele)
             {
-                try
-                {
-                    if (top == max - 1)
-                    {
-                        Console.WriteLine("Stack Overflow");
-
-                    }
-                    else
-                    {
-                        ele[++top] = item;
-                    }
-                }
-                catch (StackOverflowException e)
-                {
-                    Console.WriteLine(e);
-                }
-            }
-
-
-
-            public int pop()
-            {
-
-
-                if (top == -1)
-                {
-                    Console.WriteLine("Stack Underflow");
-                    return -1;
-                }
-                else
-                {
-                    Console.WriteLine("Poped element is: " + ele[top]);
-                    return ele[top--];
-                }
-
-
-
-
-
-
-
-            }
-
-
-
-            public void printStack()
-            {
-                try
-                {
-                    if (top == -1)
-                    {
-                        Console.WriteLine("Stack is Empty");
-                        return;
-                    }
-                    else
-                    {
-                        for (int i = 0; i <= top; i++)
-                        {
-                            Console.WriteLine("Item[" + (i + 1) + "]: " + ele[i]);
-                        }
-                    }
-                }
-                catch (InsufficientExecutionStackException e)
-                {
-                    Console.WriteLine(e);
-                }
+                Console.WriteLine(i);
             }
         }
-
-
-
-        class Program
+        public void Reverse()
         {
-            static void Main()
+            Array.Reverse(elements);
+            foreach (int i in elements)
             {
-                Stack S = new Stack(10);
+                Console.WriteLine(i);
+            }
+            Array.Reverse(ele);
+            foreach (string i in ele)
+            {
+                Console.WriteLine(i);
+            }
+        }
+        public void Copy()
+        {
+            Array.Copy(elements, 0, arr, 0, 2);
+            foreach (int value in arr)
+            {
+                Console.WriteLine(value);
+            }
+        }
+        public void Clear()
+        {
+            Array.Clear(elements, 0, elements.Length);
+            foreach (int j in elements)
+            {
 
-
-
-                S.push(101);
-                S.push(102);
-                S.push(103);
-                S.push(104);
-                S.push(105);
-                S.push(110);
-
-
-
-
-                Console.WriteLine("Items are : ");
-                S.printStack();
-
-
-
-                S.pop();
-                S.pop();
-                S.pop();
-                S.pop();
-                S.pop();
-                S.pop();
-                S.pop();
-
-
-
-
-                Console.ReadKey();
+                Console.WriteLine(j);
             }
 
+        }
+
+        public static void Main()
+        {
+            Program p = new Program();
+            Console.WriteLine("elements sorted are:");
+            p.Sort();
+            Console.WriteLine("after reverse of elements");
+            p.Reverse();
+            Console.WriteLine("Copy of elements to arr");
+            p.Copy();
+            Console.WriteLine("Clearing the elements");
+            p.Clear();
+
+            Console.ReadLine();
         }
     }
 }
